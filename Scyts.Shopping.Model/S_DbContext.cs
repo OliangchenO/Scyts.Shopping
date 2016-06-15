@@ -52,6 +52,6 @@ namespace Scyts.Shopping.Model
 
         public DbSet<Model.File> File { get; set; }
 
-        public DbSet<Model.Good_File> Good_File { get; set; }
+        public DbSet<Model.Good_File> Good_File { get; set; } 
     }
 }
