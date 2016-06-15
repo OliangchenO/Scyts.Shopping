@@ -1,0 +1,58 @@
+﻿
+@{
+    Layout = null;
+}
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>Index</title>
+    <link href="~/Content/themes/bootstrap/easyui.css" rel="stylesheet" />
+    <link href="~/Content/themes/icon.css" rel="stylesheet" />
+    <script src="~/Scripts/jquery-1.11.3.min.js"></script>
+    <script src="~/Scripts/jquery.easyui-1.4.3.min.js"></script>
+    <script src="~/Scripts/locale/easyui-lang-zh_CN.js"></script>
+
+</head>
+<body class="easyui-layout" >
+    <div data-options="region:'north',border:false">Scyts Management</div>
+    <div data-options="region:'west'" style="width:150px;padding:10px;">
+        <ul class="ul_mainMenu"></ul>
+
+    </div>
+    
+    <div data-options="region:'center'">
+        <div class="div_mainTab" data-options="fit:true"></div>
+
+    </div>
+</body>
+</html>
+
+<script>
+
+    $('.ul_mainMenu').tree({
+        url: '../Source/menuData.json',
+        method: 'get',
+        fit:true,
+        onClick: function (node) {
+
+            var href = node.attributes.href;
+            var title = node.text;
+            if ($(".div_mainTab").tabs("exists", title)) { $(".div_mainTab").tabs("select", title); return false; }
+            $('.div_mainTab').tabs('add', {
+                title: title,
+               // href: href,
+                closable: true,
+                height:"auto",
+                content: '<iframe scrolling="no"   frameborder="0"  src="' + href + '" style="width:100%;height:100%;"></iframe>'
+               
+            });
+          
+        }
+    });
+
+    $(".div_mainTab").tabs();
+
+</script>
